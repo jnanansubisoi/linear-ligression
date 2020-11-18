@@ -16,8 +16,19 @@ def predict_price(area) -> float:
     You can run this program from the command line using `python3 regression.py`.
     """
     response = requests.get(TRAIN_DATA_URL)
+    
     # YOUR IMPLEMENTATION HERE
-    ...
+    dataset=pandas.read_csv(response)
+    X_train=dataset.iloc[:1,:].values
+    Y_train=dataset.iloc[1,:].value
+    
+    # training model
+    from sklearn.linear_model import LinearRegression
+    regressor=LinearRegression()
+    regressor.fit(X_train, Y_train)
+    precdicted_y= regressor.predict(area)
+    
+    return predicted_y
 
 
 if __name__ == "__main__":
